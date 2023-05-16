@@ -34,7 +34,7 @@ router.post("/songs", (req, res) => {
     const newSong = new Song({
         title,
         artist,
-        coverImage: imageUrl,
+        imageUrl,
         youtubeLink,
     });
 

@@ -4,11 +4,12 @@ const User = require("../models/User.model");
 const { isAuthenticated } = require("../middleware/jwt.middleware");
 
 // GET /api/user - Retrieves user information
-router.get("/user", isAuthenticated, (req, res, next) => {
-    console.log("User route reached"); // Add this line
+router.get("/user/:id", isAuthenticated, (req, res, next) => {
     // Assuming you have the authenticated user's ID stored in req.user
-    const userId = req.user._id;
-    console.log(req.user._id);
+    //const userId = req.user._id;
+    //const userId = req.payload._id;
+    const userId = req.params.id;
+    console.log(userId);
     User.findById(userId)
         .then((user) => {
             if (!user) {
@@ -17,9 +18,9 @@ router.get("/user", isAuthenticated, (req, res, next) => {
             }
 
             // Only include necessary user information
-            const { email, name, imageUrl } = user;
+            const { _id, email, name, imageUrl } = user;
             console.log(user);
-            res.status(200).json({ email, name, imageUrl });
+            res.status(200).json({ email, name, imageUrl, _id });
         })
         .catch((err) => {
             console.error(err);
