@@ -25,7 +25,7 @@ const songRoutes = require("./routes/song.routes");
 app.use("/api", songRoutes);
 
 const authRoutes = require("./routes/auth.routes");
-app.use("/auth", authRoutes);
+app.use("/api/auth", authRoutes);
 
 const userRoutes = require("./routes/user.routes");
 app.use("/api", isAuthenticated, userRoutes);
