@@ -27,5 +27,14 @@ router.get("/user/:id", isAuthenticated, (req, res, next) => {
             res.status(500).json({ message: "Internal Server Error" });
         });
 });
-
+router.get("/users", isAuthenticated, (req, res, next) => {
+    User.find()
+        .then((users) => {
+            res.status(200).json(users);
+        })
+        .catch((err) => {
+            console.error(err);
+            res.status(500).json({ message: "Internal Server Error" });
+        });
+});
 module.exports = router;
